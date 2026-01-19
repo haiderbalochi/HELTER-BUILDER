@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haider Dev | Professional Web Builder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #00f2ff;
+            --secondary: #bd00ff;
+            --discord: #5865F2;
+            --dark: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --text: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* --- PARTICLE BACKGROUND --- */
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a1a1a, #000);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        /* --- DISCORD FLOATING BUTTON --- */
+        .discord-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--discord);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(88, 101, 242, 0.6);
+            z-index: 2000;
+            transition: 0.3s;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .discord-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 40px rgba(88, 101, 242, 1);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .profile-img-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 30px;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.3);
+            animation: pulse 3s infinite;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #333;
+            border: 4px solid var(--dark);
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        .typewriter {
+            font-size: 1.5rem;
+            color: #ccc;
+            margin-bottom: 30px;
+            min-height: 1.5em;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.4s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* --- SECTIONS --- */
+        .section {
+            padding: 80px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* --- PORTFOLIO --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--glass);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 10px 40px rgba(189, 0, 255, 0.2);
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        /* --- REVIEWS --- */
+        .reviews-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .review-form {
+            background: var(--glass);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .review-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .review-card {
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--secondary);
+            animation: slideIn 0.5s ease;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .stars { color: gold; }
+
+        /* --- ANIMATIONS --- */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(0, 242, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .reviews-container { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas"></canvas>
+
+    <a href="https://discord.gg/ePSsf6gH25" target="_blank" class="discord-btn" title="Join Discord">
+        <i class="fab fa-discord"></i>
+    </a>
+
+    <nav>
+        <div class="logo">Haider Dev</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact" class="btn" style="padding: 5px 20px; border: 1px solid var(--primary);">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="profile-img-container">
+            <img src="icon.png" alt="Haider Dev" class="profile-img" onerror="this.src='https://via.placeholder.com/200/00f2ff/000000?text=Haider'">
+        </div>
+        <h1>I am <span id="name-text">Haider Dev</span></h1>
+        <div class="typewriter" id="typewriter"></div>
+        <a href="#portfolio" class="btn">View My Work</a>
+    </section>
+
+    <div style="display: flex; justify-content: space-around; padding: 60px 0; background: linear-gradient(90deg, rgba(0,242,255,0.1), rgba(189,0,255,0.1)); margin: 50px 0;">
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; font-weight: bold;">6+</div>
+            <div style="color: var(--primary);">Years Exp.</div>
+        </div>
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; font-weight: bold;">50+</div>
+            <div style="color: var(--primary);">Projects</div>
+        </div>
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; font-weight: bold;">100%</div>
+            <div style="color: var(--primary);">Satisfaction</div>
+        </div>
+    </div>
+
+    <section class="section" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div style="background: var(--glass); padding: 40px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #ddd;">
+                I am a highly motivated and experienced <strong>Web Builder</strong> with over 6 years of professional experience in the web development industry. I have worked with multiple companies, delivering modern, responsive, and user-friendly websites. I am passionate about learning new technologies and committed to delivering high-quality results on every project.
+            </p>
+        </div>
+    </section>
+
+    <section class="section" id="portfolio">
+        <h2 class="section-title">My Projects</h2>
+        <div class="portfolio-grid">
+            <div class="project-card">
+                <h3 style="color: var(--primary); margin-bottom: 10px;">ThumbPro Store</h3>
+                <p style="color: #ccc; margin-bottom: 20px;">A high-performance e-commerce solution with modern UI.</p>
+                <a href="https://wwwthumb-pro.store" target="_blank" class="card-link">Visit Site <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="project-card">
+                <h3 style="color: var(--primary); margin-bottom: 10px;">Plugin Verse</h3>
+                <p style="color: #ccc; margin-bottom: 20px;">A versatile platform showcasing plugin development.</p>
+                <a href="https://pluginverse.vercel.app/" target="_blank" class="card-link">Visit Site <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+                <h3 style="color: var(--primary); margin-bottom: 10px;">Neon Agency</h3>
+                <p style="color: #ccc; margin-bottom: 20px;">Corporate portfolio for a leading digital agency.</p>
+                <a href="#" class="card-link">Visit Site <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="reviews">
+        <h2 class="section-title">Client Reviews</h2>
+        <div class="reviews-container">
+            <div class="review-form">
+                <h3 style="margin-bottom: 20px; color: var(--primary);">Leave a Review</h3>
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <input type="text" id="clientName" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="clientMsg" rows="4" placeholder="Your Feedback" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <select id="clientRating">
+                            <option value="5">⭐⭐⭐⭐⭐</option>
+                            <option value="4">⭐⭐⭐⭐</option>
+                            <option value="3">⭐⭐⭐</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Submit Review</button>
+                </form>
+            </div>
+
+            <div class="review-list" id="reviewList">
+                <div style="text-align:center; padding: 20px; color: #666;">Loading Reviews...</div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid #333; margin-top: 50px;">
+        <p>&copy; 2024 Haider Dev. All Rights Reserved.</p>
+    </footer>
+
+    <script type="module">
+        // --- 1. FIREBASE SETUP (Updated with your credentials) ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDJGaGBuiYmDzNHWmumg9o4TikOuEwKHaY",
+            authDomain: "haider-build.firebaseapp.com",
+            projectId: "haider-build",
+            storageBucket: "haider-build.firebasestorage.app",
+            messagingSenderId: "1084224084804",
+            appId: "1:1084224084804:web:fe32b4cc599339f93b1511",
+            measurementId: "G-F0885ZWEJL"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        // --- 2. REVIEW SYSTEM LOGIC ---
+        const reviewForm = document.getElementById('reviewForm');
+        const reviewList = document.getElementById('reviewList');
+
+        // Submit Review
+        reviewForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btn = reviewForm.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "Submitting...";
+            btn.disabled = true;
+
+            const name = document.getElementById('clientName').value;
+            const msg = document.getElementById('clientMsg').value;
+            const rating = document.getElementById('clientRating').value;
+            let stars = "⭐".repeat(rating);
+            
+            try {
+                await addDoc(collection(db, "reviews"), {
+                    name: name,
+                    msg: msg,
+                    stars: stars,
+                    timestamp: new Date()
+                });
+                
+                alert("Review Submitted Successfully!");
+                reviewForm.reset();
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                alert("Error submitting review. Check Console.");
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // Load Reviews (Real-time)
+        const q = query(collection(db, "reviews"), orderBy("timestamp", "desc"));
+        
+        onSnapshot(q, (snapshot) => {
+            reviewList.innerHTML = ""; 
+            if (snapshot.empty) {
+                reviewList.innerHTML = "<p style='text-align:center; color:#666;'>No reviews yet. Be the first!</p>";
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                const review = doc.data();
+                const div = document.createElement('div');
+                div.className = 'review-card';
+                div.innerHTML = `
+                    <div class="review-header">
+                        <strong>${review.name}</strong>
+                        <span class="stars">${review.stars}</span>
+                    </div>
+                    <p>${review.msg}</p>
+                `;
+                reviewList.appendChild(div);
+            });
+        });
+    </script>
+
+    <script>
+        // --- 3. TYPEWRITER EFFECT ---
+        const text = "Web Builder | Designer | Developer";
+        const typeWriterElement = document.getElementById('typewriter');
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                typeWriterElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        window.onload = typeWriter;
+
+        // --- 4. PARTICLE BACKGROUND ---
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray;
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x; this.y = y;
+                this.directionX = directionX; this.directionY = directionY;
+                this.size = size; this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = '#00f2ff'; ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                this.x += this.directionX; this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 2) - 1; let directionY = (Math.random() * 2) - 1;
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, '#00f2ff'));
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        function connect() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
+                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width/7) * (canvas.height/7)) {
+                        ctx.strokeStyle = 'rgba(0, 242, 255, 0.1)'; ctx.lineWidth = 1;
+                        ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = innerWidth; canvas.height = innerHeight; init();
+        });
+
+        init(); animate();
+    </script>
+</body>
+</html>
