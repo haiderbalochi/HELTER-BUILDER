@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haider Baloch — Professional Web Developer</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000000'/><text x='50' y='72' font-size='60' font-family='Arial Black' font-weight='bold' fill='%2300f0ff' text-anchor='middle'>H</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000000'/><text x='50' y='72' font-size='60' font-family='Arial Black' font-weight='bold' fill='%2300d4ff' text-anchor='middle'>H</text></svg>" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -44,13 +44,13 @@
             cursor: default;
         }
 
-        /* ===== SELECTION ===== */
+        /* Selection */
         ::selection {
             background: var(--cyan);
             color: #000;
         }
 
-        /* ===== SCROLLBAR ===== */
+        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 5px;
         }
@@ -65,7 +65,7 @@
             background: var(--magenta);
         }
 
-        /* ===== SCROLL PROGRESS ===== */
+        /* Scroll Progress */
         #scroll-progress {
             position: fixed;
             top: 0;
@@ -77,7 +77,7 @@
             transition: width 0.1s linear;
         }
 
-        /* ===== BACKGROUND VIDEO ===== */
+        /* Background Video */
         .video-background {
             position: fixed;
             inset: 0;
@@ -97,35 +97,35 @@
             position: fixed;
             inset: 0;
             z-index: 1;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0, 0, 0, 0.25); /* light overlay for readability */
             pointer-events: none;
         }
 
-        /* ===== GRID OVERLAY ===== */
+        /* Grid Overlay */
         .grid-overlay {
             position: fixed;
             inset: 0;
             z-index: 1;
-            background-image: linear-gradient(rgba(0, 212, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 212, 255, 0.02) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(0, 212, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.015) 1px, transparent 1px);
             background-size: 50px 50px;
             pointer-events: none;
-            mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
         }
 
-        /* ===== NOISE OVERLAY ===== */
+        /* Noise Overlay */
         .noise-overlay {
             position: fixed;
             inset: 0;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.025;
+            opacity: 0.015;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
             background-size: 200px 200px;
         }
 
-        /* ===== PRELOADER ===== */
+        /* Preloader */
         #preloader {
             position: fixed;
             inset: 0;
@@ -172,7 +172,7 @@
             letter-spacing: 2px;
         }
 
-        /* ===== NAVIGATION ===== */
+        /* Navigation */
         #navbar {
             position: fixed;
             top: 0;
@@ -187,7 +187,7 @@
             background: transparent;
         }
         #navbar.scrolled {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             padding: 12px 40px;
@@ -267,13 +267,13 @@
             }
         }
 
-        /* ===== MAIN CONTENT ===== */
+        /* Main Content */
         #main-content {
             position: relative;
             z-index: 10;
         }
 
-        /* ===== SECTION BASE ===== */
+        /* Section Base */
         .section {
             padding: 90px 40px;
             max-width: 1100px;
@@ -320,7 +320,7 @@
             }
         }
 
-        /* ===== HERO SECTION ===== */
+        /* Hero Section */
         #hero {
             min-height: 100vh;
             display: flex;
@@ -366,13 +366,8 @@
             animation: blink 0.8s step-end infinite;
         }
         @keyframes blink {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .hero-description {
@@ -446,7 +441,7 @@
             }
         }
 
-        /* ===== SCROLL INDICATOR ===== */
+        /* Scroll Indicator */
         .scroll-indicator {
             position: absolute;
             bottom: 30px;
@@ -481,21 +476,12 @@
             animation: wheelScroll 2s ease infinite;
         }
         @keyframes wheelScroll {
-            0% {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-            70% {
-                opacity: 0;
-                transform: translateX(-50%) translateY(12px);
-            }
-            100% {
-                opacity: 0;
-                transform: translateX(-50%) translateY(0);
-            }
+            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            70% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(0); }
         }
 
-        /* ===== ABOUT SECTION ===== */
+        /* About Section */
         #about .about-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -576,7 +562,7 @@
             }
         }
 
-        /* ===== SKILLS SECTION ===== */
+        /* Skills Section */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -637,7 +623,7 @@
             }
         }
 
-        /* ===== PROJECTS SECTION ===== */
+        /* Projects Section */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -652,6 +638,7 @@
             color: inherit;
             display: block;
             transition: all 0.35s var(--transition-smooth);
+            position: relative;
         }
         .project-card:hover {
             border-color: rgba(0, 212, 255, 0.45);
@@ -702,18 +689,12 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             font-family: var(--font-mono);
-            transition: all 0.3s ease;
-        }
-        .project-tag.live {
             background: rgba(0, 212, 255, 0.12);
             color: var(--cyan);
             border: 1px solid rgba(0, 212, 255, 0.3);
         }
-        .project-card:hover .project-tag.live {
+        .project-card:hover .project-tag {
             background: rgba(0, 212, 255, 0.2);
-        }
-        .project-card {
-            position: relative;
         }
 
         @media (max-width: 768px) {
@@ -729,7 +710,7 @@
             }
         }
 
-        /* ===== CONTACT SECTION ===== */
+        /* Contact Section */
         .contact-wrapper {
             display: flex;
             flex-direction: column;
@@ -795,7 +776,7 @@
             }
         }
 
-        /* ===== FOOTER ===== */
+        /* Footer */
         #footer {
             padding: 30px;
             text-align: center;
@@ -816,7 +797,7 @@
             font-weight: 500;
         }
 
-        /* ===== REVEAL ANIMATIONS ===== */
+        /* Reveal Animations */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -840,7 +821,7 @@
 </head>
 <body>
 
-    <!-- ===== PRELOADER ===== -->
+    <!-- Preloader -->
     <div id="preloader">
         <div class="preloader-logo">HB</div>
         <div class="preloader-bar-container">
@@ -849,10 +830,10 @@
         <div class="preloader-percentage" id="preloader-percentage">0%</div>
     </div>
 
-    <!-- ===== SCROLL PROGRESS ===== -->
+    <!-- Scroll Progress -->
     <div id="scroll-progress"></div>
 
-    <!-- ===== BACKGROUND VIDEO ===== -->
+    <!-- Background Video -->
     <div class="video-background">
         <video autoplay muted loop playsinline id="bg-video">
             <source src="background.mp4" type="video/mp4">
@@ -861,13 +842,13 @@
     </div>
     <div class="video-overlay"></div>
 
-    <!-- ===== GRID OVERLAY ===== -->
+    <!-- Grid Overlay -->
     <div class="grid-overlay"></div>
 
-    <!-- ===== NOISE OVERLAY ===== -->
+    <!-- Noise Overlay -->
     <div class="noise-overlay"></div>
 
-    <!-- ===== NAVBAR ===== -->
+    <!-- Navbar -->
     <nav id="navbar">
         <a href="#hero" class="nav-logo">HB</a>
         <ul class="nav-links">
@@ -879,10 +860,10 @@
         </ul>
     </nav>
 
-    <!-- ===== MAIN CONTENT ===== -->
+    <!-- Main Content -->
     <div id="main-content">
 
-        <!-- HERO SECTION -->
+        <!-- Hero -->
         <section id="hero">
             <div class="hero-content">
                 <h1 class="hero-name">HAIDER BALOCH</h1>
@@ -905,7 +886,7 @@
             </div>
         </section>
 
-        <!-- ABOUT SECTION -->
+        <!-- About -->
         <section id="about" class="section">
             <h2 class="section-title reveal">About Me</h2>
             <div class="section-divider reveal"></div>
@@ -944,7 +925,7 @@
             </div>
         </section>
 
-        <!-- SKILLS SECTION -->
+        <!-- Skills -->
         <section id="skills" class="section">
             <h2 class="section-title reveal">My Skills</h2>
             <div class="section-divider reveal"></div>
@@ -995,257 +976,238 @@
             </div>
         </section>
 
-        <!-- PROJECTS SECTION -->
+        <!-- Projects -->
         <section id="projects" class="section">
             <h2 class="section-title reveal">Featured Work</h2>
             <div class="section-divider reveal"></div>
             <p class="section-subtitle reveal">Live Projects</p>
             <div class="projects-grid">
                 <a href="https://elite-truck-dispatch.vercel.app/" target="_blank" rel="noopener noreferrer"
-                class="project-card reveal">
-                <span class="project-tag live">Live</span>
-                <div class="project-icon">🚛</div>
-                <h3 class="project-title">Elite Truck Dispatch</h3>
-                <p class="project-description">
-                    Professional logistics and dispatch platform with fleet management,
-                    real-time tracking, and an intuitive dashboard.
-                </p>
-                <span class="project-link-text">View Project →</span>
-            </a>
-            <a href="https://knighthq.vercel.app/" target="_blank" rel="noopener noreferrer"
-            class="project-card reveal">
-            <span class="project-tag live">Live</span>
-            <div class="project-icon">⚔️</div>
-            <h3 class="project-title">Knight HQ</h3>
-            <p class="project-description">
-                A sleek corporate website with a premium dark aesthetic and
-                modern layout designed for strong brand presence.
-            </p>
-            <span class="project-link-text">View Project →</span>
-        </a>
-        <a href="https://shoriyacart.vercel.app/" target="_blank" rel="noopener noreferrer"
-        class="project-card reveal">
-        <span class="project-tag live">Live</span>
-        <div class="project-icon">🛒</div>
-        <h3 class="project-title">Shoriya Cart</h3>
-        <p class="project-description">
-            Full-featured e-commerce platform with product management,
-            cart functionality, and seamless checkout experience.
-        </p>
-        <span class="project-link-text">View Project →</span>
-    </a>
-</div>
-</section>
-
-<!-- CONTACT SECTION -->
-<section id="contact" class="section">
-    <h2 class="section-title reveal">Contact Me</h2>
-    <div class="section-divider reveal"></div>
-    <p class="section-subtitle reveal">Let's Work Together</p>
-    <div class="contact-wrapper">
-        <a href="tel:+923257944372" class="contact-item reveal from-bottom">
-            <div class="contact-icon">📱</div>
-            <div>
-                <div class="contact-label">Phone</div>
-                <div class="contact-text">+92 325 7944372</div>
+                   class="project-card reveal">
+                    <span class="project-tag">Live</span>
+                    <div class="project-icon">🚛</div>
+                    <h3 class="project-title">Elite Truck Dispatch</h3>
+                    <p class="project-description">
+                        Professional logistics and dispatch platform with fleet management,
+                        real-time tracking, and an intuitive dashboard.
+                    </p>
+                    <span class="project-link-text">View Project →</span>
+                </a>
+                <a href="https://knighthq.vercel.app/" target="_blank" rel="noopener noreferrer"
+                   class="project-card reveal">
+                    <span class="project-tag">Live</span>
+                    <div class="project-icon">⚔️</div>
+                    <h3 class="project-title">Knight HQ</h3>
+                    <p class="project-description">
+                        A sleek corporate website with a premium dark aesthetic and
+                        modern layout designed for strong brand presence.
+                    </p>
+                    <span class="project-link-text">View Project →</span>
+                </a>
+                <a href="https://shoriyacart.vercel.app/" target="_blank" rel="noopener noreferrer"
+                   class="project-card reveal">
+                    <span class="project-tag">Live</span>
+                    <div class="project-icon">🛒</div>
+                    <h3 class="project-title">Shoriya Cart</h3>
+                    <p class="project-description">
+                        Full-featured e-commerce platform with product management,
+                        cart functionality, and seamless checkout experience.
+                    </p>
+                    <span class="project-link-text">View Project →</span>
+                </a>
             </div>
-        </a>
-        <a href="https://wa.me/923257944372" target="_blank" rel="noopener noreferrer"
-        class="contact-item reveal from-bottom">
-        <div class="contact-icon">💬</div>
-        <div>
-            <div class="contact-label">WhatsApp</div>
-            <div class="contact-text">+92 325 7944372</div>
-        </div>
-    </a>
-</div>
-</section>
+        </section>
 
-</div>
+        <!-- Contact -->
+        <section id="contact" class="section">
+            <h2 class="section-title reveal">Contact Me</h2>
+            <div class="section-divider reveal"></div>
+            <p class="section-subtitle reveal">Let's Work Together</p>
+            <div class="contact-wrapper">
+                <a href="tel:+923257944372" class="contact-item reveal from-bottom">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <div class="contact-label">Phone</div>
+                        <div class="contact-text">+92 325 7944372</div>
+                    </div>
+                </a>
+                <a href="https://wa.me/923257944372" target="_blank" rel="noopener noreferrer"
+                   class="contact-item reveal from-bottom">
+                    <div class="contact-icon">💬</div>
+                    <div>
+                        <div class="contact-label">WhatsApp</div>
+                        <div class="contact-text">+92 325 7944372</div>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-<!-- FOOTER -->
-<footer id="footer">
-    <p class="footer-text">
-        &copy; 2024 <strong>Haider Baloch</strong> — All Rights Reserved
-    </p>
-</footer>
+    </div>
 
-<!-- ===== JAVASCRIPT ===== -->
-<script>
-    (function() {
-        'use strict';
+    <!-- Footer -->
+    <footer id="footer">
+        <p class="footer-text">
+            &copy; 2024 <strong>Haider Baloch</strong> — All Rights Reserved
+        </p>
+    </footer>
 
-        // ===== PRELOADER =====
-        const preloader = document.getElementById('preloader');
-        const preloaderBar = document.getElementById('preloader-bar');
-        const preloaderPercentage = document.getElementById('preloader-percentage');
-        let progress = 0;
+    <script>
+        (function() {
+            'use strict';
 
-        const preloaderInterval = setInterval(() => {
-            progress += Math.floor(Math.random() * 4) + 3;
-            if (progress > 100) progress = 100;
-            preloaderBar.style.width = progress + '%';
-            preloaderPercentage.textContent = progress + '%';
-            if (progress === 100) {
-                clearInterval(preloaderInterval);
-                setTimeout(() => {
-                    preloader.classList.add('hidden');
-                }, 300);
+            // Preloader
+            const preloader = document.getElementById('preloader');
+            const preloaderBar = document.getElementById('preloader-bar');
+            const preloaderPercentage = document.getElementById('preloader-percentage');
+            let progress = 0;
+            const preloaderInterval = setInterval(() => {
+                progress += Math.floor(Math.random() * 4) + 3;
+                if (progress > 100) progress = 100;
+                preloaderBar.style.width = progress + '%';
+                preloaderPercentage.textContent = progress + '%';
+                if (progress === 100) {
+                    clearInterval(preloaderInterval);
+                    setTimeout(() => preloader.classList.add('hidden'), 300);
+                }
+            }, 70);
+
+            // Scroll progress
+            const scrollProgress = document.getElementById('scroll-progress');
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                scrollProgress.style.width = scrollPercent + '%';
+            });
+
+            // Navbar scrolled
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                navbar.classList.toggle('scrolled', window.scrollY > 50);
+            });
+
+            // Active nav link
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120;
+                    if (window.scrollY >= sectionTop) current = section.getAttribute('id');
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // Typing effect
+            const typingText = document.getElementById('typing-text');
+            const roles = [
+                'Professional Web Developer',
+                'Portfolio Maker',
+                'UI/UX Designer',
+                'Frontend Expert',
+                'Website Architect'
+            ];
+            let roleIndex = 0,
+                charIndex = 0,
+                isDeleting = false,
+                typingDelay = 80;
+
+            function typeEffect() {
+                const currentRole = roles[roleIndex];
+                if (isDeleting) {
+                    charIndex--;
+                    typingText.textContent = currentRole.substring(0, charIndex);
+                    typingDelay = 35;
+                } else {
+                    charIndex++;
+                    typingText.textContent = currentRole.substring(0, charIndex);
+                    typingDelay = 75;
+                }
+                if (!isDeleting && charIndex === currentRole.length) {
+                    isDeleting = true;
+                    typingDelay = 2200;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                    typingDelay = 400;
+                }
+                setTimeout(typeEffect, typingDelay);
             }
-        }, 70);
+            typeEffect();
 
-        // ===== SCROLL PROGRESS =====
-        const scrollProgress = document.getElementById('scroll-progress');
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
-        });
+            // Reveal on scroll
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            revealElements.forEach(el => revealObserver.observe(el));
 
-        // ===== NAVBAR SCROLL =====
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+            // Counter animation
+            const statNumbers = document.querySelectorAll('.about-stat-number');
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.getAttribute('data-count'));
+                        let current = 0;
+                        const increment = target / 40;
+                        const interval = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(interval);
+                            }
+                            entry.target.textContent = Math.floor(current) + '+';
+                        }, 45);
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            statNumbers.forEach(num => counterObserver.observe(num));
 
-        // ===== ACTIVE NAV LINK =====
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 120;
-                if (window.scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
+            // Skill bars
+            const skillBars = document.querySelectorAll('.skill-bar-fill');
+            const skillObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const width = entry.target.getAttribute('data-width');
+                        setTimeout(() => entry.target.style.width = width + '%', 150);
+                        skillObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            skillBars.forEach(bar => skillObserver.observe(bar));
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
+                });
             });
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
 
-        // ===== TYPING EFFECT =====
-        const typingText = document.getElementById('typing-text');
-        const roles = [
-            'Professional Web Developer',
-            'Portfolio Maker',
-            'UI/UX Designer',
-            'Frontend Expert',
-            'Website Architect'
-        ];
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingDelay = 80;
-
-        function typeEffect() {
-            const currentRole = roles[roleIndex];
-            if (isDeleting) {
-                charIndex--;
-                typingText.textContent = currentRole.substring(0, charIndex);
-                typingDelay = 35;
-            } else {
-                charIndex++;
-                typingText.textContent = currentRole.substring(0, charIndex);
-                typingDelay = 75;
-            }
-
-            if (!isDeleting && charIndex === currentRole.length) {
-                isDeleting = true;
-                typingDelay = 2200;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                typingDelay = 400;
+            // Ensure video plays (autoplay might be blocked in some browsers)
+            const bgVideo = document.getElementById('bg-video');
+            if (bgVideo) {
+                bgVideo.play().catch(() => {
+                    // If autoplay is blocked, we can show a static background or just keep it dark
+                    console.log('Video autoplay blocked, showing fallback background.');
+                    document.querySelector('.video-overlay').style.background = 'rgba(0,0,0,0.7)';
+                });
             }
 
-            setTimeout(typeEffect, typingDelay);
-        }
-        typeEffect();
-
-        // ===== REVEAL ON SCROLL =====
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // ===== COUNTER ANIMATION =====
-        const statNumbers = document.querySelectorAll('.about-stat-number');
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = parseInt(entry.target.getAttribute('data-count'));
-                    let current = 0;
-                    const increment = target / 40;
-                    const stepTime = 45;
-                    const counterInterval = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            current = target;
-                            clearInterval(counterInterval);
-                        }
-                        entry.target.textContent = Math.floor(current) + '+';
-                    }, stepTime);
-                    counterObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        statNumbers.forEach(num => counterObserver.observe(num));
-
-        // ===== SKILL BARS =====
-        const skillBars = document.querySelectorAll('.skill-bar-fill');
-        const skillObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const width = entry.target.getAttribute('data-width');
-                    setTimeout(() => {
-                        entry.target.style.width = width + '%';
-                    }, 150);
-                    skillObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        skillBars.forEach(bar => skillObserver.observe(bar));
-
-        // ===== SMOOTH SCROLL =====
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // ===== BACKGROUND VIDEO HANDLING =====
-        const bgVideo = document.getElementById('bg-video');
-        if (bgVideo) {
-            bgVideo.play().catch(() => {
-                // Autoplay might be blocked, add a fallback
-                document.querySelector('.video-overlay').style.background = 'rgba(0,0,0,0.7)';
-            });
-        }
-
-        console.log('%c Haider Baloch Portfolio ', 'background: #000; color: #00d4ff; font-size: 1.5rem; font-weight: bold; padding: 8px 16px; border: 2px solid #ff2d75;');
-        console.log('%c Contact: +92 325 7944372', 'color: #00d4ff; font-size: 1rem;');
-
-    })();
-</script>
+            console.log('%c Haider Baloch Portfolio ', 'background: #000; color: #00d4ff; font-size: 1.5rem; font-weight: bold; padding: 8px 16px; border: 2px solid #ff2d75;');
+            console.log('%c Contact: +92 325 7944372', 'color: #00d4ff; font-size: 1rem;');
+        })();
+    </script>
 </body>
 </html>
