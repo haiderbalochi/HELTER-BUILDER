@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haider Baloch — Professional Web Developer</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000000'/><text x='50' y='72' font-size='60' font-family='Arial Black' font-weight='bold' fill='%2300d4ff' text-anchor='middle'>H</text></svg>" type="image/svg+xml">
+    <link rel="icon" type="image/png" href="icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
@@ -46,13 +45,11 @@
             cursor: default;
         }
 
-        /* Selection */
         ::selection {
             background: var(--cyan);
             color: #000;
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 5px;
         }
@@ -67,7 +64,6 @@
             background: var(--magenta);
         }
 
-        /* Scroll Progress */
         #scroll-progress {
             position: fixed;
             top: 0;
@@ -79,7 +75,6 @@
             transition: width 0.1s linear;
         }
 
-        /* Background Video */
         .video-background {
             position: fixed;
             inset: 0;
@@ -99,11 +94,10 @@
             position: fixed;
             inset: 0;
             z-index: 1;
-            background: rgba(0, 0, 0, 0.25); /* light overlay for readability */
+            background: rgba(0, 0, 0, 0.25);
             pointer-events: none;
         }
 
-        /* Grid Overlay */
         .grid-overlay {
             position: fixed;
             inset: 0;
@@ -116,7 +110,6 @@
             -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
         }
 
-        /* Noise Overlay */
         .noise-overlay {
             position: fixed;
             inset: 0;
@@ -127,7 +120,6 @@
             background-size: 200px 200px;
         }
 
-        /* Preloader */
         #preloader {
             position: fixed;
             inset: 0;
@@ -174,7 +166,6 @@
             letter-spacing: 2px;
         }
 
-        /* Navigation */
         #navbar {
             position: fixed;
             top: 0;
@@ -269,13 +260,11 @@
             }
         }
 
-        /* Main Content */
         #main-content {
             position: relative;
             z-index: 10;
         }
 
-        /* Section Base */
         .section {
             padding: 90px 40px;
             max-width: 1100px;
@@ -322,7 +311,6 @@
             }
         }
 
-        /* Hero Section */
         #hero {
             min-height: 100vh;
             display: flex;
@@ -443,7 +431,6 @@
             }
         }
 
-        /* Scroll Indicator */
         .scroll-indicator {
             position: absolute;
             bottom: 30px;
@@ -483,7 +470,6 @@
             100% { opacity: 0; transform: translateX(-50%) translateY(0); }
         }
 
-        /* About Section */
         #about .about-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -564,7 +550,6 @@
             }
         }
 
-        /* Skills Section */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -625,7 +610,6 @@
             }
         }
 
-        /* Projects Section */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -723,7 +707,6 @@
             }
         }
 
-        /* Contact Section */
         .contact-wrapper {
             display: flex;
             flex-direction: column;
@@ -790,7 +773,6 @@
             }
         }
 
-        /* Footer */
         #footer {
             padding: 30px;
             text-align: center;
@@ -811,7 +793,6 @@
             font-weight: 500;
         }
 
-        /* Reveal Animations */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -861,6 +842,9 @@
 
     <!-- Noise Overlay -->
     <div class="noise-overlay"></div>
+
+    <!-- Click Sound (hidden) -->
+    <audio id="click-sound" src="click.mp4" preload="auto"></audio>
 
     <!-- Navbar -->
     <nav id="navbar">
@@ -1220,7 +1204,24 @@
                 });
             });
 
-            // Ensure video plays (autoplay might be blocked in some browsers)
+            // Click sound
+            const clickSound = document.getElementById('click-sound');
+            if (clickSound) {
+                document.addEventListener('click', () => {
+                    clickSound.currentTime = 0;
+                    clickSound.play().catch(() => {
+                        // Autoplay policy may block initially, but clicks are allowed
+                        console.log('Click sound play blocked');
+                    });
+                });
+            }
+
+            // Disable right click
+            document.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+            });
+
+            // Ensure video plays
             const bgVideo = document.getElementById('bg-video');
             if (bgVideo) {
                 bgVideo.play().catch(() => {
