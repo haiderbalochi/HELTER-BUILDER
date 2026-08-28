@@ -187,17 +187,17 @@
             border-bottom: 1px solid rgba(0, 212, 255, 0.15);
         }
         .nav-logo {
-            font-family: var(--font-primary);
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--cyan);
-            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
             text-decoration: none;
+        }
+        .nav-logo img {
+            height: 40px;
+            width: auto;
             transition: all 0.3s ease;
         }
-        .nav-logo:hover {
-            letter-spacing: 5px;
-            color: var(--white);
+        .nav-logo img:hover {
+            transform: scale(1.05);
         }
         .nav-links {
             display: flex;
@@ -255,8 +255,8 @@
                 font-size: 0.68rem;
                 letter-spacing: 0.5px;
             }
-            .nav-logo {
-                font-size: 1.2rem;
+            .nav-logo img {
+                height: 30px;
             }
         }
 
@@ -844,11 +844,16 @@
     <div class="noise-overlay"></div>
 
     <!-- Click Sound (hidden) -->
-    <audio id="click-sound" src="click.mp4" preload="auto"></audio>
+    <audio id="click-sound" preload="auto">
+        <source src="click.mp3" type="audio/mpeg">
+        <source src="click.mp4" type="audio/mp4">
+    </audio>
 
     <!-- Navbar -->
     <nav id="navbar">
-        <a href="#hero" class="nav-logo">HB</a>
+        <a href="#hero" class="nav-logo">
+            <img src="icon.png" alt="Haider Baloch Logo">
+        </a>
         <ul class="nav-links">
             <li><a href="#hero" class="nav-link active">Home</a></li>
             <li><a href="#about" class="nav-link">About</a></li>
@@ -1210,7 +1215,6 @@
                 document.addEventListener('click', () => {
                     clickSound.currentTime = 0;
                     clickSound.play().catch(() => {
-                        // Autoplay policy may block initially, but clicks are allowed
                         console.log('Click sound play blocked');
                     });
                 });
