@@ -6,6 +6,8 @@
     <title>Haider Baloch — Professional Web Developer</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000000'/><text x='50' y='72' font-size='60' font-family='Arial Black' font-weight='bold' fill='%2300d4ff' text-anchor='middle'>H</text></svg>" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
             --bg: #0a0a0a;
@@ -648,6 +650,14 @@
             font-size: 2.5rem;
             margin-bottom: 15px;
             display: inline-block;
+            color: var(--cyan);
+            transition: all 0.35s var(--transition-smooth);
+            line-height: 1;
+        }
+        .project-card:hover .project-icon {
+            color: var(--magenta);
+            transform: scale(1.2) rotate(-5deg);
+            text-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
         }
         .project-title {
             font-family: var(--font-primary);
@@ -708,6 +718,9 @@
             .project-title {
                 font-size: 1.1rem;
             }
+            .project-icon {
+                font-size: 2rem;
+            }
         }
 
         /* Contact Section */
@@ -747,6 +760,7 @@
             background: rgba(0, 212, 255, 0.1);
             border: 1px solid rgba(0, 212, 255, 0.25);
             flex-shrink: 0;
+            color: var(--cyan);
         }
         .contact-text {
             font-size: 1.05rem;
@@ -985,7 +999,7 @@
                 <a href="https://elite-truck-dispatch.vercel.app/" target="_blank" rel="noopener noreferrer"
                    class="project-card reveal">
                     <span class="project-tag">Live</span>
-                    <div class="project-icon">🚛</div>
+                    <div class="project-icon"><i class="fas fa-truck"></i></div>
                     <h3 class="project-title">Elite Truck Dispatch</h3>
                     <p class="project-description">
                         Professional logistics and dispatch platform with fleet management,
@@ -996,7 +1010,7 @@
                 <a href="https://knighthq.vercel.app/" target="_blank" rel="noopener noreferrer"
                    class="project-card reveal">
                     <span class="project-tag">Live</span>
-                    <div class="project-icon">⚔️</div>
+                    <div class="project-icon"><i class="fas fa-chess-knight"></i></div>
                     <h3 class="project-title">Knight HQ</h3>
                     <p class="project-description">
                         A sleek corporate website with a premium dark aesthetic and
@@ -1007,11 +1021,22 @@
                 <a href="https://shoriyacart.vercel.app/" target="_blank" rel="noopener noreferrer"
                    class="project-card reveal">
                     <span class="project-tag">Live</span>
-                    <div class="project-icon">🛒</div>
+                    <div class="project-icon"><i class="fas fa-shopping-cart"></i></div>
                     <h3 class="project-title">Shoriya Cart</h3>
                     <p class="project-description">
                         Full-featured e-commerce platform with product management,
                         cart functionality, and seamless checkout experience.
+                    </p>
+                    <span class="project-link-text">View Project →</span>
+                </a>
+                <a href="https://www.thumb-pro.store/" target="_blank" rel="noopener noreferrer"
+                   class="project-card reveal">
+                    <span class="project-tag">Live</span>
+                    <div class="project-icon"><i class="fas fa-thumbs-up"></i></div>
+                    <h3 class="project-title">Thumb Pro</h3>
+                    <p class="project-description">
+                        Full-featured Graphic Designers platform with all management,
+                        cart functionality, and seamless live chat experience.
                     </p>
                     <span class="project-link-text">View Project →</span>
                 </a>
@@ -1025,7 +1050,7 @@
             <p class="section-subtitle reveal">Let's Work Together</p>
             <div class="contact-wrapper">
                 <a href="tel:+923257944372" class="contact-item reveal from-bottom">
-                    <div class="contact-icon">📱</div>
+                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
                     <div>
                         <div class="contact-label">Phone</div>
                         <div class="contact-text">+92 325 7944372</div>
@@ -1033,7 +1058,7 @@
                 </a>
                 <a href="https://wa.me/923257944372" target="_blank" rel="noopener noreferrer"
                    class="contact-item reveal from-bottom">
-                    <div class="contact-icon">💬</div>
+                    <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
                     <div>
                         <div class="contact-label">WhatsApp</div>
                         <div class="contact-text">+92 325 7944372</div>
@@ -1199,7 +1224,6 @@
             const bgVideo = document.getElementById('bg-video');
             if (bgVideo) {
                 bgVideo.play().catch(() => {
-                    // If autoplay is blocked, we can show a static background or just keep it dark
                     console.log('Video autoplay blocked, showing fallback background.');
                     document.querySelector('.video-overlay').style.background = 'rgba(0,0,0,0.7)';
                 });
