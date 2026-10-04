@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#050506" />
+    <meta name="color-scheme" content="dark" />
+
+    <title>Haider Baloch — Web &amp; App Developer</title>
+    <meta
+      name="description"
+      content="Haider Baloch is a web and app developer based in Lahore, Pakistan, building modern websites, applications, ecommerce experiences and custom digital products."
+    />
+    <meta
+      name="keywords"
+      content="Haider Baloch, web developer Lahore, app developer Pakistan, frontend developer, full stack developer, ecommerce development, UI UX designer, custom digital products"
+    />
+    <meta name="author" content="Haider Baloch" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://haiderbaloch.dev/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Haider Baloch" />
+    <meta property="og:title" content="Haider Baloch — Web &amp; App Developer" />
+    <meta
+      property="og:description"
+      content="Web &amp; app developer in Lahore, Pakistan. Modern websites, applications, ecommerce and custom digital products — from idea to launch."
+    />
+    <meta property="og:url" content="https://haiderbaloch.dev/" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image:alt" content="Haider Baloch — Web &amp; App Developer" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Haider Baloch — Web &amp; App Developer" />
+    <meta
+      name="twitter:description"
+      content="Web &amp; app developer in Lahore, Pakistan. Modern websites, applications, ecommerce and custom digital products."
+    />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <!-- Brand icon set — all generated from the supplied ic.png mark -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Type system
+        Archivo          variable wdth 62–125 / wght 100–900 → expanded poster display
+        Instrument Serif italic accent for editorial pull-quotes
+        Hanken Grotesk   body
+        IBM Plex Mono    labels, meta, data
+    -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Haider Baloch",
+        "jobTitle": "Web & App Developer",
+        "email": "mailto:haider.dev.leads@gmail.com",
+        "telephone": "+92-325-7944372",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Lahore",
+          "addressCountry": "PK"
+        },
+        "url": "https://haiderbaloch.dev/",
+        "knowsAbout": [
+          "Web Development",
+          "App Development",
+          "UI/UX Design",
+          "Full-Stack Development",
+          "Ecommerce",
+          "AI-powered web experiences"
+        ]
+      }
+    </script>
+
+  </head>
+  <body>
+    <div id="root"></div>
+    <div class="boot-fallback" id="boot-fallback">HAIDER BALOCH</div>
+    <noscript>
+      <div style="padding: 3rem; font-family: sans-serif; color: #edebE4">
+        This portfolio uses JavaScript for its interactive experience.
+        Please enable JavaScript, or email
+        <a style="color: #c8ff4d" href="mailto:haider.dev.leads@gmail.com">haider.dev.leads@gmail.com</a>.
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Remove the static boot label as soon as React mounts.
+      (function () {
+        var remove = function () {
+          var el = document.getElementById('boot-fallback')
+          if (el && el.parentNode) el.parentNode.removeChild(el)
+        }
+        window.addEventListener('load', function () { setTimeout(remove, 400) })
+        setTimeout(remove, 2500)
+      })()
+    </script>
+  </body>
+</html>

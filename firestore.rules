@@ -1,0 +1,102 @@
+rules_version = '2';
+
+// ============================================================================
+//  HAIDER BALOCH PORTFOLIO — Firestore rules
+// ----------------------------------------------------------------------------
+//  Deploy with:  firebase deploy --only firestore:rules
+//
+//  SECURITY MODEL
+//  · The public may CREATE a review, but it is forced to `status: "pending"`.
+//  · The public may READ only reviews that are already `published`.
+//  · Only an authenticated admin may approve / hide / edit / delete anything.
+//  · Admin entitlement = custom claim `admin == true`  OR  the UID below.
+//
+//  ⚠️  REPLACE `REPLACE_WITH_ADMIN_UID` with the UID printed by
+//      `npm run admin:create` (also mirrored in `.env` → VITE_ADMIN_UID).
+//      Nothing in the client bundle can elevate privileges on its own, and no
+//      password is ever stored in frontend source.
+// ============================================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.admin == true ||
+        request.auth.uid == 'REPLACE_WITH_ADMIN_UID'
+      );
+    }
+
+    function isValidEmail(value) {
+      return value is string
+        && value.size() >= 5
+        && value.size() <= 120
+        && value.matches('^[^@ ]+@[^@ ]+\\.[^@ ]+$');
+    }
+
+    // A brand new review from the public. Every field is validated and the
+    // status is pinned to `pending` — visitors can never self-publish.
+    function isValidNewReview() {
+      let d = request.resource.data;
+      return d.keys().hasAll(['name', 'email', 'role', 'rating', 'text', 'status', 'createdAt'])
+        && d.name is string
+        && d.name.size() >= 2
+        && d.name.size() <= 80
+        && isValidEmail(d.email)
+        && d.role is string
+        && d.role.size() <= 80
+        && d.rating is int
+        && d.rating >= 1
+        && d.rating <= 5
+        && d.text is string
+        && d.text.size() >= 10
+        && d.text.size() <= 1200
+        && d.status == 'pending'
+        && ('updatedAt' in d);
+    }
+
+    function isValidReviewUpdate() {
+      let d = request.resource.data;
+      let before = resource.data;
+      return d.name is string && d.name.size() >= 2 && d.name.size() <= 80
+        && isValidEmail(d.email)
+        && d.role is string && d.role.size() <= 80
+        && d.rating is int && d.rating >= 1 && d.rating <= 5
+        && d.text is string && d.text.size() >= 10 && d.text.size() <= 1200
+        && d.status in ['pending', 'published', 'hidden', 'rejected']
+        && d.createdAt == before.createdAt
+        && ('updatedAt' in d);
+    }
+
+    // ---------------------------------------------------------------- reviews
+    match /reviews/{reviewId} {
+      // Public readers only ever see published reviews. Because the public
+      // query itself filters on `status == 'published'`, Firestore can prove
+      // the rule is satisfied — no leak, no composite index required.
+      allow read: if resource.data.status == 'published' || isAdmin();
+
+      allow create: if isValidNewReview();
+
+      allow update: if isAdmin() && isValidReviewUpdate();
+
+      allow delete: if isAdmin();
+    }
+
+    // ----------------------------------------------------------------- admins
+    // Written only by the trusted Admin SDK (`npm run admin:create` /
+    // `npm run admin:claim`). Clients may read their own record for UI hints.
+    match /admins/{uid} {
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
+      allow write: if false;
+    }
+
+    // Everything else in the database is closed by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

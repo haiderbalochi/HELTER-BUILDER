@@ -1,0 +1,472 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   TOKENS
+   ========================================================================== */
+:root {
+  --ink: #040405;
+  --ink-850: #0d0d10;
+  --bone: #f0eee7;
+  --bone-mute: rgba(240, 238, 231, 0.56);
+  --bone-faint: rgba(240, 238, 231, 0.32);
+  --accent: #c8ff4d;
+  --hairline: rgba(240, 238, 231, 0.09);
+  --hairline-strong: rgba(240, 238, 231, 0.17);
+  --glass: rgba(255, 255, 255, 0.026);
+
+  /* Editorial shell: wider gutters so the display type can breathe. */
+  --shell: min(104rem, 100% - 2rem);
+  --shell-gutter: 2rem;
+  --nav-h: 4.5rem;
+
+  /* Display type is Archivo on its wide axis — the identity of the site. */
+  --f-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --f-body: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+  --f-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --shell: min(104rem, 100% - 6rem);
+    --shell-gutter: 3rem;
+    --nav-h: 5.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --shell: min(112rem, 100% - 8rem);
+    --shell-gutter: 4rem;
+  }
+}
+
+@layer base {
+  html {
+    background: var(--ink);
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: #1f1f26 var(--ink);
+  }
+
+  * {
+    border-color: var(--hairline);
+  }
+
+  body {
+    @apply bg-ink text-bone font-sans antialiased;
+    overflow-x: hidden;
+    font-size: 16px;
+    line-height: 1.62;
+    letter-spacing: -0.005em;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #040405;
+  }
+
+  ::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--ink);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1f1f26;
+    border: 3px solid var(--ink);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2f2f39;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  input:invalid {
+    box-shadow: none;
+  }
+}
+
+@layer components {
+  /* Static label shown until React mounts (removed by the boot script). */
+  .boot-fallback {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: var(--ink);
+    color: rgba(240, 238, 231, 0.4);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    z-index: 0;
+  }
+
+  /* ---- layout ---------------------------------------------------------- */
+  .shell {
+    width: var(--shell);
+    margin-inline: auto;
+  }
+
+  .hairline {
+    border: 1px solid var(--hairline);
+  }
+
+  .hairline-t {
+    border-top: 1px solid var(--hairline);
+  }
+
+  .hairline-b {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .glass {
+    background: linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.014) 45%,
+      rgba(255, 255, 255, 0.005) 100%
+    );
+    backdrop-filter: blur(16px) saturate(115%);
+    -webkit-backdrop-filter: blur(16px) saturate(115%);
+    border: 1px solid var(--hairline);
+  }
+
+  .glass-strong {
+    background: rgba(6, 6, 8, 0.86);
+    backdrop-filter: blur(22px) saturate(125%);
+    -webkit-backdrop-filter: blur(22px) saturate(125%);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  /* ---- type ------------------------------------------------------------ */
+
+  /* Poster display: Archivo pushed onto its expanded axis. */
+  .display {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-variation-settings: 'wdth' 114, 'wght' 800;
+    text-transform: uppercase;
+    letter-spacing: -0.035em;
+    line-height: 0.86;
+  }
+
+  /* The identity mark — widest axis, used only for HAIDER / BALOCH. */
+  .display-x {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-variation-settings: 'wdth' 125, 'wght' 800;
+    text-transform: uppercase;
+    letter-spacing: -0.045em;
+    line-height: 0.82;
+  }
+
+  /* Section headline: a touch tighter than .display so long titles hold. */
+  .display-head {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-variation-settings: 'wdth' 108, 'wght' 800;
+    text-transform: uppercase;
+    letter-spacing: -0.038em;
+    line-height: 0.85;
+  }
+
+  .serif-accent {
+    font-family: var(--f-serif);
+    font-weight: 400;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+
+  .label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--bone-faint);
+  }
+
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--bone-mute);
+  }
+
+  .accent-text {
+    color: var(--accent);
+  }
+
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1.25px rgba(240, 238, 231, 0.4);
+  }
+
+  .outline-text-soft {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(240, 238, 231, 0.26);
+  }
+
+  .gradient-fade {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* ---- surfaces -------------------------------------------------------- */
+  .grain {
+    position: fixed;
+    inset: -200%;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    background-size: 170px 170px;
+    mix-blend-mode: overlay;
+    animation: grain-shift 6s steps(6) infinite;
+  }
+
+  @keyframes grain-shift {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-3%, 2%); }
+    40% { transform: translate(2%, -3%); }
+    60% { transform: translate(-2%, -2%); }
+    80% { transform: translate(3%, 1%); }
+    100% { transform: translate(0, 0); }
+  }
+
+  /*
+   * Cinematic edge darkening.
+   *
+   * CAUTION: in a radial gradient every pixel *outside* the ending ellipse
+   * receives the FINAL stop colour. Keep the ending ellipse larger than the
+   * viewport and the centre stop transparent, otherwise the whole page gets
+   * a flat veil (the fixed header sits above this layer, so only the body
+   * would look washed out).
+   */
+  .vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 120% 92% at 50% 45%, transparent 46%, rgba(4, 4, 5, 0.62) 100%),
+      linear-gradient(to bottom, rgba(4, 4, 5, 0.5), transparent 18%);
+  }
+
+  /* Editorial column rules — vertical hairlines only, never a full grid. */
+  .col-rules {
+    background-image: linear-gradient(
+      to right,
+      rgba(240, 238, 231, 0.055) 1px,
+      transparent 1px
+    );
+    background-size: calc(100% / 6) 100%;
+  }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(240, 238, 231, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(240, 238, 231, 0.03) 1px, transparent 1px);
+    background-size: 96px 96px;
+  }
+
+  .dot-grid {
+    background-image: radial-gradient(rgba(240, 238, 231, 0.14) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+
+  .accent-glow {
+    background: radial-gradient(closest-side, rgba(200, 255, 77, 0.16), transparent 72%);
+  }
+
+  /* A single soft key light — used behind hero and CTA type. */
+  .key-light {
+    background: radial-gradient(
+      closest-side,
+      rgba(240, 238, 231, 0.075),
+      rgba(240, 238, 231, 0.022) 46%,
+      transparent 74%
+    );
+  }
+
+  /* ---- buttons --------------------------------------------------------- */
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-3 select-none;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    @apply h-12 px-6 rounded-full transition-colors duration-300;
+    will-change: transform;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-ink;
+    @apply hover:bg-accent-bright;
+  }
+
+  .btn-ghost {
+    @apply btn text-bone;
+    background: transparent;
+    border: 1px solid var(--hairline-strong);
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(200, 255, 77, 0.55);
+    color: var(--accent);
+  }
+
+  .btn[disabled] {
+    @apply opacity-45 pointer-events-none;
+  }
+
+  /* ---- forms ----------------------------------------------------------- */
+  .field {
+    @apply w-full bg-transparent text-[15px] text-bone placeholder:text-bone-faint;
+    @apply py-3.5 outline-none transition-colors duration-200;
+    border-bottom: 1px solid var(--hairline-strong);
+    border-radius: 0;
+  }
+
+  .field:focus {
+    border-bottom-color: var(--accent);
+  }
+
+  .field::placeholder {
+    color: var(--bone-faint);
+  }
+
+  .field-error {
+    border-bottom-color: #ff6b57 !important;
+  }
+
+  /* ---- scroll rhythm --------------------------------------------------- */
+  .rhythm {
+    padding-block: clamp(5.5rem, 12vh, 9rem);
+  }
+
+  .rhythm-tight {
+    padding-block: clamp(4rem, 8vh, 6.5rem);
+  }
+
+  .rhythm-loose {
+    padding-block: clamp(7rem, 16vh, 12rem);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .text-balance-none {
+    text-wrap: nowrap;
+  }
+}
+
+/* ==========================================================================
+   CURSOR — hidden on touch / small screens, restored for accessibility
+   ========================================================================== */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+@media (hover: none), (pointer: coarse) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: auto !important;
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .grain {
+    animation: none;
+  }
+}
